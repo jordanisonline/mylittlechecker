@@ -1,0 +1,30 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Azure
+      uses: azure/setup-azure-cli@v2
+      with:
+        azure-cli-version: latest
+
+    - name: Login to Azure
+      run: az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID
+    
+    - name: Install Bicep
+      run: |
+        echo "deb [arch=amd64] https://packages.microsoft.com/bicep/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/bicep.list
+        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+        sudo apt-get update
+        sudo apt-get install bicep
+    
+    - name: Build and Deploy
+      run: bicep build main.bicep && az deployment group create --resource-group myResourceGroup --template-file main.json
