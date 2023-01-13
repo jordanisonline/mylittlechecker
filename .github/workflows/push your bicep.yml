@@ -1,6 +1,7 @@
-on: [push]
-workflow_dispatch:
 name: Deploy to Azure
+on:
+  push:
+  workflow_dispatch:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
