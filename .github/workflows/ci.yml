@@ -26,10 +26,7 @@ jobs:
     
     - name: Install Bicep
       run: |
-        echo "deb [arch=amd64] https://packages.microsoft.com/bicep/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/bicep.list
-        wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
-        sudo apt-get update
-        sudo apt-get install bicep
+        npm install -g @bicep/cli
     
     - name: Build and Deploy
       run: bicep build main.bicep && az deployment group create --resource-group myResourceGroup --template-file main.json
