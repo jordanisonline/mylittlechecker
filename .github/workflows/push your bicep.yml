@@ -1,4 +1,6 @@
 name: Deploy to Azure
+env:
+  ACTIONS_RUNNER_DEBUG: true
 on:
   push:
   workflow_dispatch:
