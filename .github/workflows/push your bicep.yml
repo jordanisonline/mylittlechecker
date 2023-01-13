@@ -1,5 +1,6 @@
 on: [push]
-name: Azure ARM
+workflow_dispatch:
+name: Deploy to Azure
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
