@@ -22,15 +22,5 @@ resource symbolicname 'Microsoft.KeyVault/vaults@2022-07-01' = {
         tenantId: 'string'
       }
     ]
-    }
-    provisioningState: 'string'
-    publicNetworkAccess: 'string'
-    sku: {
-      family: 'A'
-      name: 'string'
-    }
-    softDeleteRetentionInDays: int
-    tenantId: 'string'
-    vaultUri: 'string'
   }
 }
