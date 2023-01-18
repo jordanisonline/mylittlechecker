@@ -1,9 +1,10 @@
 ﻿@description('Specifies the location for resources.')
-param location string = resourceGroup().location
-param SPapplicationId string
-param SPobjectId string
+param location string = 'westus'
+param SPapplicationId string = '910766b3-8209-417a-8ecb-fd29ec2db0a7'
+param SPobjectId string = 'a7df3aa9-e97d-466c-9135-73eafb3a1ae2'
+param tenantId string = 'de4be5fa-3db1-434c-8868-cb3a511dc5d0'
 
-resource symbolicname 'Microsoft.KeyVault/vaults@2022-07-01' = {
+resource mylittletrackervault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: 'mylittletracker-vault'
   location: location
   tags: {
@@ -19,8 +20,12 @@ resource symbolicname 'Microsoft.KeyVault/vaults@2022-07-01' = {
             'get','list'
           ]
         }
-        tenantId: 'string'
+        tenantId: tenantId
       }
     ]
+    sku: {
+      family: 'A'
+      name: 'standard'
+    tenantId: tenantId
   }
 }
